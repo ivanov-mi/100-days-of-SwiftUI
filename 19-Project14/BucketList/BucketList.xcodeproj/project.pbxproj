@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB81D71C2BFCD1EE00855BFF /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81D71B2BFCD1EE00855BFF /* AuthenticationError.swift */; };
 		AB8BB81A2BFB764700E472BC /* BucketListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8BB8192BFB764700E472BC /* BucketListApp.swift */; };
 		AB8BB81C2BFB764700E472BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8BB81B2BFB764700E472BC /* ContentView.swift */; };
 		AB8BB81E2BFB764A00E472BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB8BB81D2BFB764A00E472BC /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB81D71B2BFCD1EE00855BFF /* AuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
 		AB8BB8162BFB764700E472BC /* BucketList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BucketList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB8BB8192BFB764700E472BC /* BucketListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketListApp.swift; sourceTree = "<group>"; };
 		AB8BB81B2BFB764700E472BC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				AB8BB8292BFB913F00E472BC /* Location.swift */,
 				AB8BB81D2BFB764A00E472BC /* Assets.xcassets */,
 				AB8BB81F2BFB764A00E472BC /* Preview Content */,
+				AB81D71B2BFCD1EE00855BFF /* AuthenticationError.swift */,
 			);
 			path = BucketList;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB81D71C2BFCD1EE00855BFF /* AuthenticationError.swift in Sources */,
 				AB8BB81C2BFB764700E472BC /* ContentView.swift in Sources */,
 				AB8BB8302BFBA61600E472BC /* ContentView-ViewModel.swift in Sources */,
 				AB8BB82E2BFB9D0A00E472BC /* Result.swift in Sources */,

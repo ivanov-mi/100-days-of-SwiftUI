@@ -105,6 +105,11 @@ struct ContentView: View {
                 .background(.blue)
                 .foregroundColor(.white)
                 .clipShape(.capsule)
+                .alert("Authentication Failed", isPresented: $viewModel.showingAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text(viewModel.authenticationError?.localizedDescription ?? "Unknown error")
+                }
         }
     }
 }

@@ -5,7 +5,7 @@
 //  Created by Martin Ivanov on 5/20/24.
 //
 
-import Foundation
+import SwiftUI
 import MapKit
 import CoreLocation
 import LocalAuthentication
@@ -16,6 +16,14 @@ extension ContentView {
         private(set) var locations: [Location]
         var selectedPlace: Location?
         var isUnlocked = false
+        var showingAlert: Bool = false {
+            didSet {
+                if !showingAlert {
+                    authenticationError = nil
+                }
+            }
+        }
+        var authenticationError: AuthenticationError?
         
         let savePath = URL.documentsDirectory.appending(path: "SavedPlaces")
         
@@ -55,11 +63,18 @@ extension ContentView {
                     if success {
                         self.isUnlocked = true
                     } else {
-                        // error
+                        guard let errorDescription = authenticationError?.localizedDescription else {
+                            self.authenticationError = AuthenticationError.unknown
+                            return
+                        }
+                        
+                        self.authenticationError = AuthenticationError.authenticationFailed(localizedDescription: errorDescription)
+                        self.showingAlert = true
                     }
                 }
             } else {
-                // no biometrics
+                authenticationError = AuthenticationError.biometricsUnavailable
+                showingAlert = true
             }
         }
         
