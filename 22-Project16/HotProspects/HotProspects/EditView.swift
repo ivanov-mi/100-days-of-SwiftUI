@@ -60,7 +60,7 @@ struct EditView: View {
         let prospect = Prospect(name: "Name", emailAddress: "Email", isContacted: false)
         
         return EditView(prospect: prospect)
-            .modelContainer(for: Prospect.self)
+            .modelContainer(container)
     } catch {
         return Text("Failed to create container: \(error.localizedDescription)")
     }

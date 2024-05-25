@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            ProspectsView(filter: .nome)
+            ProspectsView(filter: .none)
                 .tabItem {
                     Label("Everyone", systemImage: "person.3")
                 }
