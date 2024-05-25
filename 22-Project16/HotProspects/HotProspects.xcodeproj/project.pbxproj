@@ -15,6 +15,7 @@
 		AB34C6AF2C00C6D6006CF917 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB34C6AE2C00C6D6006CF917 /* MeView.swift */; };
 		AB34C6B12C00C9A3006CF917 /* Prospect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB34C6B02C00C9A3006CF917 /* Prospect.swift */; };
 		AB34C6B42C00D133006CF917 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = AB34C6B32C00D133006CF917 /* CodeScanner */; };
+		ABFB18992C020C0C003FD034 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFB18982C020C0C003FD034 /* EditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		AB34C6AE2C00C6D6006CF917 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
 		AB34C6B02C00C9A3006CF917 /* Prospect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prospect.swift; sourceTree = "<group>"; };
 		AB34C6B52C00D2CE006CF917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ABFB18982C020C0C003FD034 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				AB34C6A02C00C647006CF917 /* ContentView.swift */,
 				AB34C6B02C00C9A3006CF917 /* Prospect.swift */,
 				AB34C6AC2C00C6BD006CF917 /* ProspectsView.swift */,
+				ABFB18982C020C0C003FD034 /* EditView.swift */,
 				AB34C6AE2C00C6D6006CF917 /* MeView.swift */,
 				AB34C6A22C00C649006CF917 /* Assets.xcassets */,
 				AB34C6A42C00C649006CF917 /* Preview Content */,
@@ -158,6 +161,7 @@
 			files = (
 				AB34C6AF2C00C6D6006CF917 /* MeView.swift in Sources */,
 				AB34C6B12C00C9A3006CF917 /* Prospect.swift in Sources */,
+				ABFB18992C020C0C003FD034 /* EditView.swift in Sources */,
 				AB34C6AD2C00C6BD006CF917 /* ProspectsView.swift in Sources */,
 				AB34C6A12C00C647006CF917 /* ContentView.swift in Sources */,
 				AB34C69F2C00C647006CF917 /* HotProspectsApp.swift in Sources */,
