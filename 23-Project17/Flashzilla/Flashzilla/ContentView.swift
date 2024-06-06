@@ -17,7 +17,7 @@ extension View {
 struct ContentView: View {
     @Environment(\.accessibilityDifferentiateWithoutColor) var accessibilityDifferentiateWithoutColor
     @Environment (\.accessibilityVoiceOverEnabled) var accessibilityVoiceOverEnabled
-    @State private var cards: [Card] = []
+    @State private var cards: [CardViewModel] = []
     
     @State private var timeRemaining = 100
     @State private var showingEditScreen = false
@@ -42,15 +42,19 @@ struct ContentView: View {
                     .clipShape(.capsule)
                 
                 ZStack {
-                    ForEach(0..<cards.count, id: \.self) { index in
-                        CardView(card: cards[index]) {
+                    ForEach($cards, id: \.id) { $card in
+                        CardView(card: $card) { shouldRestack in
                             withAnimation {
-                                removeCard(at: index)
+                                if shouldRestack {
+                                    restackCard(card)
+                                } else {
+                                    remove(card)
+                                }
                             }
                         }
-                        .stacked(at: index, in: cards.count)
-                        .allowsHitTesting(index == cards.count - 1)
-                        .accessibilityHidden(index < cards.count - 1)
+                        .stacked(at: index(for: card), in: cards.count)
+                        .allowsHitTesting(card.id == cards.last?.id)
+                        .accessibility(hidden: card.id != cards.last?.id)
                     }
                 }
                 .allowsHitTesting(timeRemaining > 0)
@@ -91,7 +95,9 @@ struct ContentView: View {
                     HStack {
                         Button {
                             withAnimation {
-                                removeCard(at: cards.count - 1)
+                                guard var topCard = cards.last else { return }
+                                topCard.showAnswer = false
+                                restackCard(topCard)
                             }
                         } label: {
                             Image(systemName: "xmark.circle")
@@ -106,7 +112,9 @@ struct ContentView: View {
                         
                         Button {
                             withAnimation {
-                                removeCard(at: cards.count - 1)
+                                guard var topCard = cards.last else { return }
+                                topCard.showAnswer = true
+                                remove(topCard)
                             }
                         } label: {
                             Image(systemName: "checkmark.circle")
@@ -143,10 +151,8 @@ struct ContentView: View {
         .onAppear(perform: resetCards)
     }
     
-    func removeCard(at index: Int) {
-        guard index >= 0 else { return }
-        
-        cards.remove(at: index)
+    func remove(_ card: CardViewModel) {
+        cards.removeAll(where: { $0.id == card.id })
         
         if cards.isEmpty {
             isActive = false
@@ -162,9 +168,18 @@ struct ContentView: View {
     func loadData() {
         if let data = UserDefaults.standard.data(forKey: "Cards") {
             if let decoded = try? JSONDecoder().decode([Card].self, from: data) {
-                cards = decoded
+                cards = decoded.compactMap { CardViewModel(card: $0) }
             }
         }
+    }
+    
+    func index(for card: CardViewModel) -> Int {
+        cards.firstIndex(where: { $0.id == card.id }) ?? 0
+    }
+    
+    func restackCard(_ card: CardViewModel) {
+        cards.removeAll(where: { $0.id == card.id })
+        cards.insert(card, at: 0)
     }
 }
 

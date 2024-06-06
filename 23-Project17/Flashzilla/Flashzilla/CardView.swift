@@ -12,10 +12,9 @@ struct CardView: View {
     @Environment(\.accessibilityVoiceOverEnabled) var accessibilityVoiceOverEnabled
     
     @State private var offset = CGSize.zero
-    @State private var isShowingAnswer = false
     
-    let card: Card
-    var removal: (() -> Void)?
+    @Binding var card: CardViewModel
+    var removal: ((_ shouldRestack: Bool) -> Void)?
     
     var body: some View {
         ZStack {
@@ -36,7 +35,7 @@ struct CardView: View {
             
             VStack {
                 if accessibilityVoiceOverEnabled {
-                    Text(isShowingAnswer ? card.answer : card.prompt)
+                    Text(card.showAnswer ? card.answer : card.prompt)
                         .font(.largeTitle)
                         .foregroundStyle(.black)
                 } else {
@@ -44,7 +43,7 @@ struct CardView: View {
                         .font(.largeTitle)
                         .foregroundStyle(.black)
                     
-                    if isShowingAnswer {
+                    if card.showAnswer {
                         Text(card.answer)
                             .font(.title)
                             .foregroundStyle(.secondary)
@@ -66,14 +65,21 @@ struct CardView: View {
                 }
                 .onEnded {_ in
                     if abs(offset.width) > 100 {
-                        removal?()
+                        let shouldRestack = offset.width < 0
+                        
+                        if shouldRestack {
+                            offset = .zero
+                            card.showAnswer = false
+                        }
+                        
+                        removal?(shouldRestack)
                     } else {
                         offset = .zero
                     }
                 }
         )
         .onTapGesture {
-            isShowingAnswer.toggle()
+            card.showAnswer.toggle()
         }
         .animation(.bouncy, value: offset)
     }
@@ -92,5 +98,7 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView(card: .example)
+    @State var exampleCard = CardViewModel(card: .example)
+    
+    return CardView(card: $exampleCard)
 }

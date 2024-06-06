@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ABB2A4BA2C11FEE400D241BA /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB2A4B92C11FEE400D241BA /* CardViewModel.swift */; };
 		ABCC04E72C0E059500226172 /* FlashzillaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCC04E62C0E059500226172 /* FlashzillaApp.swift */; };
 		ABCC04E92C0E059500226172 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCC04E82C0E059500226172 /* ContentView.swift */; };
 		ABCC04EB2C0E059800226172 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABCC04EA2C0E059800226172 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ABB2A4B92C11FEE400D241BA /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		ABCC04E32C0E059500226172 /* Flashzilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flashzilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABCC04E62C0E059500226172 /* FlashzillaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashzillaApp.swift; sourceTree = "<group>"; };
 		ABCC04E82C0E059500226172 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				ABCC04E62C0E059500226172 /* FlashzillaApp.swift */,
 				ABCC04E82C0E059500226172 /* ContentView.swift */,
 				ABCC04F42C0E0ABE00226172 /* Card.swift */,
+				ABB2A4B92C11FEE400D241BA /* CardViewModel.swift */,
 				ABCC04F82C0E272000226172 /* EditCards.swift */,
 				ABCC04EA2C0E059800226172 /* Assets.xcassets */,
 				ABCC04EC2C0E059800226172 /* Preview Content */,
@@ -92,6 +95,8 @@
 			dependencies = (
 			);
 			name = Flashzilla;
+			packageProductDependencies = (
+			);
 			productName = Flashzilla;
 			productReference = ABCC04E32C0E059500226172 /* Flashzilla.app */;
 			productType = "com.apple.product-type.application";
@@ -120,6 +125,8 @@
 				Base,
 			);
 			mainGroup = ABCC04DA2C0E059500226172;
+			packageReferences = (
+			);
 			productRefGroup = ABCC04E42C0E059500226172 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -148,6 +155,7 @@
 			files = (
 				ABCC04E92C0E059500226172 /* ContentView.swift in Sources */,
 				ABCC04F52C0E0ABE00226172 /* Card.swift in Sources */,
+				ABB2A4BA2C11FEE400D241BA /* CardViewModel.swift in Sources */,
 				ABCC04F72C0E0B8F00226172 /* CardView.swift in Sources */,
 				ABCC04F92C0E272000226172 /* EditCards.swift in Sources */,
 				ABCC04E72C0E059500226172 /* FlashzillaApp.swift in Sources */,
