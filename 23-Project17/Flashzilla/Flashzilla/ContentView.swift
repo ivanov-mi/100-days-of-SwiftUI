@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 extension View {
     func stacked(at position: Int, in total: Int) -> some View {
@@ -15,9 +16,12 @@ extension View {
 }
 
 struct ContentView: View {
+    @Environment(\.modelContext) var modelContext
+    @Query private var cards: [Card]
+    
     @Environment(\.accessibilityDifferentiateWithoutColor) var accessibilityDifferentiateWithoutColor
     @Environment (\.accessibilityVoiceOverEnabled) var accessibilityVoiceOverEnabled
-    @State private var cards: [CardViewModel] = []
+    @State private var cardsInPlay: [CardViewModel] = []
     
     @State private var timeRemaining = 100
     @State private var showingEditScreen = false
@@ -42,7 +46,7 @@ struct ContentView: View {
                     .clipShape(.capsule)
                 
                 ZStack {
-                    ForEach($cards, id: \.id) { $card in
+                    ForEach($cardsInPlay, id: \.id) { $card in
                         CardView(card: $card) { shouldRestack in
                             withAnimation {
                                 if shouldRestack {
@@ -52,14 +56,14 @@ struct ContentView: View {
                                 }
                             }
                         }
-                        .stacked(at: index(for: card), in: cards.count)
-                        .allowsHitTesting(card.id == cards.last?.id)
-                        .accessibility(hidden: card.id != cards.last?.id)
+                        .stacked(at: index(for: card), in: cardsInPlay.count)
+                        .allowsHitTesting(card.id == cardsInPlay.last?.id)
+                        .accessibility(hidden: card.id != cardsInPlay.last?.id)
                     }
                 }
                 .allowsHitTesting(timeRemaining > 0)
                 
-                if cards.isEmpty {
+                if cardsInPlay.isEmpty {
                     Button("Start Again", action: resetCards)
                         .padding()
                         .background(.white)
@@ -95,7 +99,7 @@ struct ContentView: View {
                     HStack {
                         Button {
                             withAnimation {
-                                guard var topCard = cards.last else { return }
+                                guard var topCard = cardsInPlay.last else { return }
                                 topCard.showAnswer = false
                                 restackCard(topCard)
                             }
@@ -112,7 +116,7 @@ struct ContentView: View {
                         
                         Button {
                             withAnimation {
-                                guard var topCard = cards.last else { return }
+                                guard var topCard = cardsInPlay.last else { return }
                                 topCard.showAnswer = true
                                 remove(topCard)
                             }
@@ -140,7 +144,7 @@ struct ContentView: View {
         }
         .onChange(of: scenePhase) {
             if scenePhase == .active {
-                if cards.isEmpty == false {
+                if cardsInPlay.isEmpty == false {
                     isActive = true
                 }
             } else {
@@ -151,35 +155,31 @@ struct ContentView: View {
         .onAppear(perform: resetCards)
     }
     
-    func remove(_ card: CardViewModel) {
-        cards.removeAll(where: { $0.id == card.id })
+    private func remove(_ card: CardViewModel) {
+        cardsInPlay.removeAll(where: { $0.id == card.id })
         
-        if cards.isEmpty {
+        if cardsInPlay.isEmpty {
             isActive = false
         }
     }
     
-    func resetCards() {
+    private func resetCards() {
         timeRemaining = 100
         isActive = true
         loadData()
     }
     
-    func loadData() {
-        if let data = UserDefaults.standard.data(forKey: "Cards") {
-            if let decoded = try? JSONDecoder().decode([Card].self, from: data) {
-                cards = decoded.compactMap { CardViewModel(card: $0) }
-            }
-        }
+    private func loadData() {
+        cardsInPlay = cards.compactMap { CardViewModel(card: $0) }
     }
     
-    func index(for card: CardViewModel) -> Int {
-        cards.firstIndex(where: { $0.id == card.id }) ?? 0
+    private func index(for card: CardViewModel) -> Int {
+        cardsInPlay.firstIndex(where: { $0.id == card.id }) ?? 0
     }
     
-    func restackCard(_ card: CardViewModel) {
-        cards.removeAll(where: { $0.id == card.id })
-        cards.insert(card, at: 0)
+    private func restackCard(_ card: CardViewModel) {
+        cardsInPlay.removeAll(where: { $0.id == card.id })
+        cardsInPlay.insert(card, at: 0)
     }
 }
 

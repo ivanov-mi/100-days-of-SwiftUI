@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct EditCards: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) var modelContext
     
-    @State private var cards: [Card] = []
+    @Query private var cards: [Card]
+    
     @State private var newPrompt = ""
     @State private var newAnswer = ""
     
@@ -22,7 +25,6 @@ struct EditCards: View {
                     TextField("Answer", text: $newAnswer)
                     Button("Add Card", action: addCard)
                 }
-                
                 
                 Section {
                     ForEach(0..<cards.count, id: \.self) { index in
@@ -41,29 +43,14 @@ struct EditCards: View {
             .toolbar {
                 Button("Done", action: done)
             }
-            .onAppear(perform: loadData)
         }
     }
-    
-    func done() {
+
+    private func done() {
         dismiss()
     }
     
-    func loadData() {
-        if let data = UserDefaults.standard.data(forKey: "Cards") {
-            if let decoded = try? JSONDecoder().decode([Card].self, from: data) {
-                cards = decoded
-            }
-        }
-    }
-    
-    func saveData() {
-        if let data = try? JSONEncoder().encode(cards) {
-            UserDefaults.standard.set(data, forKey: "Cards")
-        }
-    }
-    
-    func addCard() {
+    private func addCard() {
         let trimmedPrompt = newPrompt.trimmingCharacters(in: .whitespaces)
         let trimmedAnswer = newAnswer.trimmingCharacters(in: .whitespaces)
         
@@ -72,17 +59,18 @@ struct EditCards: View {
         }
         
         let card = Card(id: UUID(), prompt: trimmedPrompt, answer: trimmedAnswer)
-        cards.insert(card, at: 0)
-        saveData()
+        
+        modelContext.insert(card)
         resetCardInput()
     }
     
-    func removeCards(at offsets: IndexSet) {
-        cards.remove(atOffsets: offsets)
-        saveData()
+    private func removeCards(at offsets: IndexSet) {
+        offsets.forEach {
+            modelContext.delete(cards[$0])
+        }
     }
     
-    func resetCardInput() {
+    private func resetCardInput() {
         newPrompt = ""
         newAnswer = ""
     }

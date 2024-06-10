@@ -84,7 +84,7 @@ struct CardView: View {
         .animation(.bouncy, value: offset)
     }
     
-    func cardBackgroundColor(offset: CGSize) -> Color {
+    private func cardBackgroundColor(offset: CGSize) -> Color {
         if offset.width > 0 {
             return .green
         }
@@ -98,7 +98,7 @@ struct CardView: View {
 }
 
 #Preview {
-    @State var exampleCard = CardViewModel(card: .example)
+    @State var exampleCard = CardViewModel(card: Card(id: UUID(), prompt: "Who player the 13th Doctor in Doctor Who?", answer: "Jodie Whittaker"))
     
     return CardView(card: $exampleCard)
 }
