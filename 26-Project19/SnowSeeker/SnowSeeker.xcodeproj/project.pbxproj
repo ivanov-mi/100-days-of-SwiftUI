@@ -53,7 +53,6 @@
 		ABCAF26D2C19C58200A869DB = {
 			isa = PBXGroup;
 			children = (
-				ABCAF2972C1A021700A869DB /* Favorites.swift */,
 				ABCAF2782C19C58200A869DB /* SnowSeeker */,
 				ABCAF2772C19C58200A869DB /* Products */,
 			);
@@ -74,6 +73,7 @@
 				ABCAF27B2C19C58200A869DB /* ContentView.swift */,
 				ABCAF28F2C19F1F500A869DB /* ResortView.swift */,
 				ABCAF2952C19FD7800A869DB /* Facility.swift */,
+				ABCAF2972C1A021700A869DB /* Favorites.swift */,
 				ABCAF2932C19F76900A869DB /* ResortDetailsView.swift */,
 				ABCAF2912C19F65C00A869DB /* SkiDetailsView.swift */,
 				ABCAF28D2C19D0F000A869DB /* WelcomeView.swift */,

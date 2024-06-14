@@ -13,8 +13,13 @@ class Favorites {
     private let key = "Favorites"
     
     init() {
-        // load our data
-        resorts = []
+        guard let data = UserDefaults.standard.data(forKey: key),
+           let decoded = try? JSONDecoder().decode(Set<String>.self, from: data) else {
+            resorts = []
+            return
+        }
+        
+        resorts = decoded
     }
     
     func contains(_ resort: Resort) -> Bool {
@@ -32,6 +37,8 @@ class Favorites {
     }
     
     func save() {
-        // write out all data
+        if let data = try? JSONEncoder().encode(resorts) {
+            UserDefaults.standard.set(data, forKey: key)
+        }
     }
 }
