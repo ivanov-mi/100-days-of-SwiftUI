@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    @State private var users: [User] = []
+    @Environment(\.modelContext) private var modelContext
+    
+    @Query(sort: \User.name) private var users: [User]
     
     var body: some View {
         NavigationStack {
@@ -44,7 +47,14 @@ struct ContentView: View {
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            users = try decoder.decode([User].self, from: data)
+            
+            let downloadedUsers = try decoder.decode([User].self, from: data)
+            let insertContext = ModelContext(modelContext.container)
+            downloadedUsers.forEach { user in
+                insertContext.insert(user)
+            }
+            
+            try insertContext.save()
         } catch {
             print("Error downloading file.")
         }
