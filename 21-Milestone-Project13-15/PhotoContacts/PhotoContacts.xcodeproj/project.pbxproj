@@ -13,6 +13,7 @@
 		AB45F2B22C230995006D1669 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB45F2B12C230995006D1669 /* Assets.xcassets */; };
 		AB45F2B52C230995006D1669 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB45F2B42C230995006D1669 /* Preview Assets.xcassets */; };
 		AB45F2BC2C2309F0006D1669 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB45F2BB2C2309F0006D1669 /* Contact.swift */; };
+		AB6F849B2C29A5E40005DD04 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F849A2C29A5E40005DD04 /* LocationFetcher.swift */; };
 		ABF1CCD82C232BDF00AC9B00 /* AddContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF1CCD72C232BDF00AC9B00 /* AddContactView.swift */; };
 		ABF1CCDA2C2331C100AC9B00 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF1CCD92C2331C100AC9B00 /* ContactView.swift */; };
 /* End PBXBuildFile section */
@@ -25,6 +26,7 @@
 		AB45F2B12C230995006D1669 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB45F2B42C230995006D1669 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AB45F2BB2C2309F0006D1669 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		AB6F849A2C29A5E40005DD04 /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
 		ABF1CCD72C232BDF00AC9B00 /* AddContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactView.swift; sourceTree = "<group>"; };
 		ABF1CCD92C2331C100AC9B00 /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,6 +63,7 @@
 			children = (
 				AB45F2AD2C230991006D1669 /* PhotoContactsApp.swift */,
 				AB45F2BB2C2309F0006D1669 /* Contact.swift */,
+				AB6F849A2C29A5E40005DD04 /* LocationFetcher.swift */,
 				AB45F2AF2C230991006D1669 /* ContentView.swift */,
 				ABF1CCD72C232BDF00AC9B00 /* AddContactView.swift */,
 				ABF1CCD92C2331C100AC9B00 /* ContactView.swift */,
@@ -152,6 +155,7 @@
 				AB45F2BC2C2309F0006D1669 /* Contact.swift in Sources */,
 				AB2AB3182C24907600409ADC /* PersistenceHelper.swift in Sources */,
 				AB45F2B02C230991006D1669 /* ContentView.swift in Sources */,
+				AB6F849B2C29A5E40005DD04 /* LocationFetcher.swift in Sources */,
 				AB45F2AE2C230991006D1669 /* PhotoContactsApp.swift in Sources */,
 				ABF1CCDA2C2331C100AC9B00 /* ContactView.swift in Sources */,
 				ABF1CCD82C232BDF00AC9B00 /* AddContactView.swift in Sources */,
@@ -291,6 +295,7 @@
 				DEVELOPMENT_TEAM = 5B8K6663CP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to save it with the contact information.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -320,6 +325,7 @@
 				DEVELOPMENT_TEAM = 5B8K6663CP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to save it with the contact information.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

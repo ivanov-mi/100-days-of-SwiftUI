@@ -46,6 +46,7 @@ struct AddContactView: View {
         }
     }
     
+    let locationFetcher = LocationFetcher()
     var image: Image? {
         uiImage != nil ? Image(uiImage: uiImage!) : nil
     }
@@ -97,6 +98,9 @@ struct AddContactView: View {
                     }
                 }
             }
+            .onAppear {
+                locationFetcher.start()
+            }
             .alert(isPresented: $showingAlert) {
                 Alert(title: Text(alertType?.title ?? ""), message: Text(alertType?.message ?? ""), dismissButton: .default(Text("OK")))
             }
@@ -115,7 +119,15 @@ struct AddContactView: View {
     }
     
     private func saveData() {
-        let contact = Contact(name: name)
+        var latitude: Double?
+        var longitude: Double?
+        
+        if let location = locationFetcher.lastKnownLocation {
+            latitude = location.latitude
+            longitude = location.longitude
+        }
+        
+        let contact = Contact(name: name, latitude: latitude, longitude: longitude)
         contacts.append(contact)
         contacts.sort()
         

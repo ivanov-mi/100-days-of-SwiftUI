@@ -6,26 +6,62 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ContactView: View {
-    var contact: Contact
+    @State private var selectedTab = 0
+    
+    let contact: Contact
+    let tabs = ["Details", "Location"]
     
     var body: some View {
         VStack {
-            Text(contact.name)
-                .font(.largeTitle)
-                .foregroundColor(.primary)
-                .padding()
+            Picker("Contact Info", selection: $selectedTab) {
+                Text("Details").tag(0)
+                Text("Location").tag(1)
+            }
+            .pickerStyle(.segmented)
             
-            contact.image?
-                .resizable()
-                .scaledToFit()
-                .padding(.bottom)
-            Spacer()
+            if selectedTab == 0 {
+                Text(contact.name)
+                    .font(.largeTitle)
+                    .foregroundColor(.primary)
+                    .padding()
+                
+                contact.image?
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.bottom)
+                Spacer()
+            } else {
+                if let coordinate = contact.coordinate {
+                    let position = MapCameraPosition.region(
+                        MKCoordinateRegion(
+                            center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude),
+                            span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+                        ))
+                    
+                    Map(initialPosition: position) {
+                        Annotation("Meeting place", coordinate: coordinate) {
+                            Image(systemName: "star.circle")
+                                .resizable()
+                                .foregroundColor(.red)
+                                .frame(width: 44, height: 44)
+                                .background(.white)
+                                .clipShape(.circle)
+                        }
+                    }
+                    .mapStyle(.standard)
+                } else {
+                    Text("No location information")
+                        .padding()
+                    Spacer()
+                }
+            }
         }
     }
 }
 
 #Preview {
-    ContactView(contact: Contact(name: "test"))
+    ContactView(contact: Contact(name: "test", latitude: nil, longitude: nil))
 }
